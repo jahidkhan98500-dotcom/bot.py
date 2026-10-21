@@ -1,10 +1,25 @@
 import telebot
+import os
+from flask import Flask
+from threading import Thread
+
+# Web server code for Render port
+app = Flask('')
+
+@app.route('/')
+def home():
+    return "Bot is alive!"
+
+def run():
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
+
+Thread(target=run).start()
 
 # আপনার দেওয়া বটের টোকেন
 BOT_TOKEN = "8517897909:AAEjONRGCHobp-4i6U_LI5Zi_2FCyCrP_kE"
 bot = telebot.TeleBot(BOT_TOKEN)
 
-# আপনার আসল টেলিগ্রাম ইউজার আইডি (123456789 কেটে দিয়ে আপনার রিয়েল আইডি নম্বরটি এখানে বসাবেন)
+# আপনার আসল টেলিগ্রাম ইউজার আইডি
 OWNER_ID = 8811727356
 
 @bot.message_handler(func=lambda message: message.from_user.id == OWNER_ID)
